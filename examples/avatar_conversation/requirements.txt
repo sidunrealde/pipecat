@@ -1,0 +1,28 @@
+# Additional requirements for avatar conversation example
+# pipecat and core dependencies are in the main pyproject.toml
+
+# Phase 1.2 - Base conversational pipeline (CURRENT PHASE)
+pipecat-ai[daily,groq,ollama,silero]>=0.0.46  # Pipecat with integrations
+pyyaml>=6.0                                    # Configuration
+python-dotenv>=1.0                             # Environment variables
+
+# Phase 2 - LivePortrait (real-time face reenactment)
+# Uncomment after Phase 1 is complete
+# torch>=2.0          # Deep learning
+# opencv-python>=4.8  # Image processing
+# transformers>=4.38  # Model loading
+
+# Phase 3 - SadTalker (audio-to-motion)
+# Uncomment after Phase 2 is complete
+# scipy>=1.13        # Signal processing
+# scikit-image>=0.24 # Image utilities
+
+# Phase 4 - Face preprocessing
+# Uncomment when adding image upload
+# mediapipe>=0.8     # Face detection
+# # or: retinaface   # Alternative face detection
+
+# Optional enhancements
+# pillow>=10.0       # Image processing
+# ffmpeg-python>=0.2 # Video encoding
+# gfpgan>=2.3        # Face enhancement (optional)

@@ -1,0 +1,73 @@
+# Avatar Conversation Pipeline Configuration
+# Phase 1.2 - Base conversational setup
+
+# Speech Recognition
+stt:
+  provider: groq           # Options: groq, openai, google, local-whisper
+  language: en
+  sample_rate: 16000
+  chunk_size: 2048
+  groq:
+    model: whisper-large-v3-turbo
+
+# Language Model
+llm:
+  provider: ollama         # Options: ollama, openai, anthropic
+  model: mistral           # For Ollama: mistral (7B), llama2 (7B), llama2:13b
+  base_url: http://localhost:11434
+  temperature: 0.7
+  max_tokens: 256
+  ollama:
+    system_prompt: "You are a helpful AI assistant. Keep responses concise and conversational."
+
+# Text-to-Speech
+tts:
+  provider: piper          # Options: piper, elevenlabs, openai, groq
+  voice: default
+  sample_rate: 22050
+  # For Piper: uses espeak for phoneme synthesis
+  # For Groq: choose from their voice selection
+  piper:
+    voice: sage
+    model: piper/default
+
+# Voice Activity Detection
+vad:
+  provider: silero         # Options: silero, webhook, service
+  vad_threshold: 0.5
+  silero:
+    threshold: 0.5
+    start_secs: 0.2
+    stop_secs: 0.8
+  min_speech_duration: 0.5  # seconds
+  min_silence_duration: 0.8  # seconds
+
+# Transport
+transport:
+  type: local             # Options: local, websocket, webrtc
+  # For local development only
+
+# Pipeline
+pipeline:
+  # Interruption handling
+  interruption_enabled: true
+  interruption_threshold: 0.5
+  
+  # Audio settings
+  input_sample_rate: 16000
+  output_sample_rate: 22050
+  
+  # Conversation
+  initial_prompt: "You are a helpful, friendly AI assistant. Keep responses concise and natural."
+  max_context_messages: 5
+
+# Logging
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Features
+features:
+  enable_avatar: false    # Set to true after Phase 2 (LivePortrait)
+  enable_motion: false    # Set to true after Phase 3 (SadTalker)
+  enable_gfpgan: false    # Face enhancement (optional)
